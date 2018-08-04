@@ -1,28 +1,57 @@
-import React, {Component} from 'react';
-import {ClockWidget} from './ClockWidget';
 import './Application.css';
+import React, {Component} from 'react';
+import TitleBar from './TitleBar';
+import SearchWidget from "./SearchWidget";
+import ItemList from "./ItemList";
 
-let data =
-    [
-        {
-            objId: 0,
-            vendor: 'Yamaha',
-            vendorUrl: 'http://www.yamaha.com',
-            model: 'MT09',
-            year: '2015',
-            engineCC: '850',
-            cyls: '3'
-        },
-        {
-            objId: 1,
-            vendor: 'Honda',
-            vendorUrl: 'http://www.honda.com',
-            model: 'CB250',
-            year: '2006',
-            engineCC: '250',
-            cyls: '2',
-        },
-    ];
+let sourceData =
+[
+    {
+        objId: 0,
+        vendor: 'Yamaha',
+        vendorUrl: 'http://www.yamaha.com',
+        model: 'MT09SP',
+        year: '2018',
+        engineCC: '850',
+        cyls: '3'
+    },
+    {
+        objId: 1,
+        vendor: 'KTM',
+        vendorUrl: 'http://www.ktm.com',
+        model: 'Duke690',
+        year: '2018',
+        engineCC: '650',
+        cyls: '1',
+    },
+    {
+        objId: 2,
+        vendor: 'Aprilia',
+        vendorUrl: 'http://www.aprilia.com',
+        model: 'Shiver',
+        year: '2017',
+        engineCC: '890',
+        cyls: '2',
+    },
+    {
+        objId: 3,
+        vendor: 'Ducati',
+        vendorUrl: 'http://www.ducati.com',
+        model: 'Monster',
+        year: '2017',
+        engineCC: '980',
+        cyls: '2',
+    },
+    {
+        objId: 4,
+        vendor: 'Kawasaki',
+        vendorUrl: 'http://www.kawasaki.com',
+        model: 'Z800',
+        year: '2018',
+        engineCC: '800',
+        cyls: '4',
+    }
+];
 
 export default class Application extends Component
 {
@@ -32,77 +61,49 @@ export default class Application extends Component
 
         this.state =
         {
-            data
+            data : sourceData,
+            filterParams :
+            {
+                modelParam : ''
+            }
         };
-
-        this.onDiscard = this.onDiscard.bind(this);
-        this.onReset = this.onReset.bind(this);
     }
 
     render()
     {
+        let {data, filterParams} = this.state;
         let res =
         (
             <div className="App">
-                <ClockWidget/>
+                <TitleBar/>
                 <br/>
-                {
-                    this.state.data.map
-                    (
-                        item =>
-                        <div key={item.objId}>
-                            <span>
-                                <a href={item.vendorUrl}>{item.vendor}</a>
-                            </span>
-                            &nbsp;
-                            <span>{item.model}</span>
-                            &nbsp;
-                            <span>({item.year})</span>
-                            &nbsp;
-                            <button type="button" onClick={() => this.onDiscard(item.objId)}>Discard</button>
-                            <br/>
-                        </div>
-                    )
-                }
+                <SearchWidget value={filterParams} onApply={this.onApplySearch} onClearSearch={this.onClearSearch}/>
                 <br/>
-                <button type="button" onClick={() => this.onReset(data)}>Reset</button>
-                <ExplainBindingsComponent/>
+                <ItemList data={data} filterParams={filterParams} onDiscard={this.onDiscard}/>
+                <br/>
+                <button type="button" onClick={() => this.onReset(sourceData)}>Reset</button>
             </div>
         );
         return res;
     }
 
-    onDiscard(itemId)
+    onDiscard = (itemId) =>
     {
-        let updatedList = this.state.data.filter(item => item.objId !== itemId);
-        this.setState({data : updatedList});
-    }
+        this.setState(prevState => ({data : prevState.data.filter(item => item.objId !== itemId)}));
+    };
 
-    onReset(listData)
+    onApplySearch = (filterParams) =>
+    {
+        this.setState({filterParams : filterParams});
+    };
+
+    onClearSearch = () =>
+    {
+        this.setState({filterParams : {modelParam : ''}});
+    };
+
+    onReset = (listData) =>
     {
         this.setState({data : listData});
-    }
-}
-
-class ExplainBindingsComponent extends Component
-{
-    constructor()
-    {
-        super();
-        this.onClickMe = this.onClickMe.bind(this);
-    }
-
-    onClickMe()
-    {
-        console.log(this);
-    }
-
-    render()
-    {
-        return (
-            <button onClick={this.onClickMe} type="button">
-                Click Me
-            </button>
-        );
-    }
+    };
 }

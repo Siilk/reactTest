@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 
-export class ClockWidget extends Component
+export default class TitleBar extends Component
 {
     constructor(props)
     {
@@ -26,9 +26,7 @@ export class ClockWidget extends Component
         let res =
         (
             <div>
-                <h1>Hello, world!</h1>
-                <h2>It is {this.state.date.toLocaleTimeString()}.</h2>
-                <button type="button" onClick={() => this.onButtonPress()}>||/></button>
+                <h3>React test</h3>
             </div>
         );
         return res;

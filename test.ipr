@@ -12,6 +12,13 @@
   <component name="ProjectCodeStyleConfiguration">
     <option name="PREFERRED_PROJECT_CODE_STYLE" value="Default" />
   </component>
+  <component name="ProjectDictionaryState">
+    <dictionary name="Siilk">
+      <words>
+        <w>cyls</w>
+      </words>
+    </dictionary>
+  </component>
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/test.iml" filepath="$PROJECT_DIR$/test.iml" />
@@ -19,5 +26,8 @@
   </component>
   <component name="ProjectRootManager">
     <output url="file://$PROJECT_DIR$/out" />
+  </component>
+  <component name="VcsDirectoryMappings">
+    <mapping directory="$PROJECT_DIR$" vcs="Git" />
   </component>
 </project>
