@@ -23,6 +23,7 @@ export default class SearchWidget extends React.Component
                 &nbsp;
                 <Button type="button" onClick={this.clearModel}>Clear field</Button>
                 <br/>
+                <br/>
                 <Button type="button" onClick={() => onApply(filterParams)}>Search</Button>
                 <Button type="button" onClick={() => this.clearSearchParams()}>Clear search</Button>
 
@@ -48,6 +49,7 @@ export default class SearchWidget extends React.Component
 
     clearSearchParams = () =>
     {
-        this.setState({filterParams : {modelParam : ''}}, () => {this.props.onApply(this.state.filterParams)});
+        this.setState({filterParams : {modelParam : ''}});
+        this.props.onClearSearch()
     };
 }

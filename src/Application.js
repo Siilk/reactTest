@@ -73,14 +73,17 @@ export default class Application extends Component
         let {data, filterParams} = this.state;
         let res =
         (
-            <div className="App">
-                <TitleBar>React test</TitleBar>
+            <div className="page">
+                <TitleBar className="title">React test</TitleBar>
                 <br/>
+            <div className="interactions">
                 <SearchWidget value={filterParams} onApply={this.onApplySearch} onClearSearch={this.onClearSearch}/>
+            </div>
                 <br/>
                 <ItemList data={data} filterParams={filterParams} onDiscard={this.onDiscard}/>
                 <br/>
                 <Button type="button" onClick={() => this.onReset(sourceData)}>Reset</Button>
+
             </div>
         );
         return res;
