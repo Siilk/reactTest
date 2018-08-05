@@ -1,4 +1,5 @@
 import React from 'react';
+import {Button} from './StatelessComponents'
 
 export default class SearchWidget extends React.Component
 {
@@ -20,10 +21,10 @@ export default class SearchWidget extends React.Component
             <form>
                 <label>Model&nbsp;<input type="text" value={filterParams.modelParam} onChange={this.storeModelParam}/></label>
                 &nbsp;
-                <button type="button" onClick={this.clearModel}>Clear field</button>
+                <Button type="button" onClick={this.clearModel}>Clear field</Button>
                 <br/>
-                <button type="button" onClick={() => onApply(filterParams)}>Search</button>
-                <button type="button" onClick={() => this.clearSearchParams()}>Clear search</button>
+                <Button type="button" onClick={() => onApply(filterParams)}>Search</Button>
+                <Button type="button" onClick={() => this.clearSearchParams()}>Clear search</Button>
 
             </form>
         );

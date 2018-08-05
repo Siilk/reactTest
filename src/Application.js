@@ -1,8 +1,7 @@
 import './Application.css';
 import React, {Component} from 'react';
-import TitleBar from './TitleBar';
-import SearchWidget from "./SearchWidget";
-import ItemList from "./ItemList";
+import SearchWidget from './SearchWidget';
+import {ItemList, Button, TitleBar} from './StatelessComponents'
 
 let sourceData =
 [
@@ -75,13 +74,13 @@ export default class Application extends Component
         let res =
         (
             <div className="App">
-                <TitleBar/>
+                <TitleBar>React test</TitleBar>
                 <br/>
                 <SearchWidget value={filterParams} onApply={this.onApplySearch} onClearSearch={this.onClearSearch}/>
                 <br/>
                 <ItemList data={data} filterParams={filterParams} onDiscard={this.onDiscard}/>
                 <br/>
-                <button type="button" onClick={() => this.onReset(sourceData)}>Reset</button>
+                <Button type="button" onClick={() => this.onReset(sourceData)}>Reset</Button>
             </div>
         );
         return res;
