@@ -1,5 +1,5 @@
 import React from 'react';
-import {Button} from './StatelessComponents'
+import {Button, SearchField} from './StatelessComponents'
 
 export default class SearchWidget extends React.Component
 {
@@ -19,37 +19,51 @@ export default class SearchWidget extends React.Component
         let res =
         (
             <form>
-                <label>Model&nbsp;<input type="text" value={filterParams.modelParam} onChange={this.storeModelParam}/></label>
-                &nbsp;
-                <Button type="button" onClick={this.clearModel}>Clear field</Button>
-                <br/>
-                <br/>
+                <SearchField label="Model" value={filterParams.modelParam}
+                    onChange={(event) => this.setSearchParam('modelParam', event.target.value)}
+                    onClear={() => this.setSearchParam('modelParam', '')}/>
+
+                <SearchField label="Vendor" value={filterParams.vendorParam}
+                    onChange={(event) => this.setSearchParam('vendorParam', event.target.value)}
+                    onClear={() => this.setSearchParam('vendorParam', '')}/>
+
+                <SearchField label="Year" value={filterParams.yearParam}
+                    onChange={(event) => this.setSearchParam('yearParam', event.target.value)}
+                    onClear={() => this.setSearchParam('yearParam', '')}/>
+
+                <SearchField label="Displacement" value={filterParams.engineCCParam}
+                    onChange={(event) => this.setSearchParam('engineCCParam', event.target.value)}
+                    onClear={() => this.setSearchParam('engineCCParam', '')}/>
+
+                <SearchField label="Cylinders" value={filterParams.cylsParam}
+                    onChange={(event) => this.setSearchParam('cylsParam', event.target.value)}
+                    onClear={() => this.setSearchParam('cylsParam', '')}/>
                 <Button type="button" onClick={() => onApply(filterParams)}>Search</Button>
                 <Button type="button" onClick={() => this.clearSearchParams()}>Clear search</Button>
-
             </form>
         );
         return res;
     }
 
-    storeModelParam = (event) =>
+    setSearchParam = (paramName, paramVal) =>
     {
-        this.setModelParam(event.target.value);
-    };
-
-    clearModel = () =>
-    {
-        this.setModelParam('');
-    };
-
-    setModelParam = model =>
-    {
-        this.setState({filterParams : {modelParam : model}});
+        let updatedFilterParams = this.state.filterParams;
+        updatedFilterParams[paramName] = paramVal;
+        this.setState({filterParams : updatedFilterParams});
     };
 
     clearSearchParams = () =>
-    {
-        this.setState({filterParams : {modelParam : ''}});
-        this.props.onClearSearch()
-    };
+        this.setState
+        (
+            {
+                filterParams :
+                {
+                    modelParam : '',
+                    vendorParam : '',
+                    yearParam: '',
+                    engineCCParam: '',
+                    cylsParam: ''
+                }
+            }, () => this.props.onApply(this.state.filterParams)
+        );
 }

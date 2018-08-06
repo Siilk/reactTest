@@ -1,6 +1,6 @@
 .page
 {
-    margin: 20px;
+    margin: 10px;
 }
 
 .title
@@ -15,7 +15,9 @@
 
 .table
 {
-    margin: 20px 0;
+    margin: 5px 0;
+    height: 250px;
+    overflow: scroll;
 }
 
 .table-header
