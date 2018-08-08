@@ -10,6 +10,21 @@ const URL_APRILIA = 'http://www.aprilia.com';
 const URL_KTM = 'http://www.ktm.com';
 const URL_YAMAHA = 'http://www.yamaha.com';
 
+export const largeColumn =
+{
+    width: '80%',
+};
+
+export const midColumn =
+{
+    width: '10%',
+};
+
+export const smallColumn =
+{
+    width: '5%',
+};
+
 export const hnFilterStructure =
 {
     modelParam : {label: 'Model', value: ''},
@@ -19,13 +34,13 @@ export const hnFilterStructure =
     cylsParam: {label: 'Cyls', value: ''}
 };
 
-export const motoFilterStructure =
+export const motoModel =
 {
-    modelParam : {label: 'Model', value: ''},
-    vendorParam : {label: 'Vendor', value: ''},
-    yearParam: {label: 'Year', value: ''},
-    engineCCParam: {label: 'Displacement', value: ''},
-    cylsParam: {label: 'Cyls', value: ''}
+    modelParam : {label: 'Model', value: '', field: 'model', colWidth: midColumn},
+    vendorParam : {label: 'Vendor', value: '', field: 'vendor', colWidth: midColumn},
+    yearParam: {label: 'Year', value: '', field: 'year', colWidth: smallColumn},
+    engineCCParam: {label: 'Displacement', value: '', field: 'engineCC', colWidth: midColumn},
+    cylsParam: {label: 'Cyls', value: '', field: 'cyls', colWidth: largeColumn}
 };
 
 export let motoSourceData =
