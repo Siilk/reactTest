@@ -1,22 +1,5 @@
 import React from 'react';
-
-
-const filterData = filterParams =>
-(
-    item =>
-    {
-        console.info(filterParams);
-        let result = true;
-        let {vendor, model, year, engineCC, cyls} = item;
-        let {modelParam, vendorParam, yearParam, engineCCParam, cylsParam} = filterParams;
-        result &= model.startsWith(modelParam);
-        result &= vendor.startsWith(vendorParam);
-        result &= yearParam !== '' ? year == yearParam : true;
-        result &= engineCCParam !== '' ? engineCC == engineCCParam : true;
-        result &= cylsParam !== '' ? cyls == cylsParam : true;
-        return result;
-    }
-);
+import {filterData} from "../utility/Functions";
 
 const largeColumn =
 {

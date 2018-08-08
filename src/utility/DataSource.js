@@ -10,7 +10,25 @@ const URL_APRILIA = 'http://www.aprilia.com';
 const URL_KTM = 'http://www.ktm.com';
 const URL_YAMAHA = 'http://www.yamaha.com';
 
-export let sourceData =
+export const hnFilterStructure =
+{
+    modelParam : {label: 'Model', value: ''},
+    vendorParam : {label: 'Vendor', value: ''},
+    yearParam: {label: 'Year', value: ''},
+    engineCCParam: {label: 'Displacement', value: ''},
+    cylsParam: {label: 'Cyls', value: ''}
+};
+
+export const motoFilterStructure =
+{
+    modelParam : {label: 'Model', value: ''},
+    vendorParam : {label: 'Vendor', value: ''},
+    yearParam: {label: 'Year', value: ''},
+    engineCCParam: {label: 'Displacement', value: ''},
+    cylsParam: {label: 'Cyls', value: ''}
+};
+
+export let motoSourceData =
 [
     {
         objId: 0,
