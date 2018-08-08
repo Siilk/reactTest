@@ -19,15 +19,16 @@ export default class FilterableListView extends Component
     render()
     {
         let {data, filterParams} = this.state;
+        let {filterObj, sourceData, listModel} = this.props;
         let res =
         (
             <div className="page">
                 <TitleBar className="title">React test</TitleBar>
                 <div className="interactions">
-                    <SearchWidget value={filterParams} defaultVal={this.props.filterObj} onApply={this.onApplySearch}/>
+                    <SearchWidget value={filterParams} defaultVal={filterObj} onApply={this.onApplySearch}/>
                 </div>
-                <ItemList data={data} filterParams={filterParams} onDiscard={this.onDiscard}/>
-                <Button onClick={() => this.onReset(this.props.sourceData)}>Reset</Button>
+                <ItemList data={data} model={listModel} filterParams={filterParams} onDiscard={this.onDiscard}/>
+                <Button onClick={() => this.onReset(sourceData)}>Reset</Button>
             </div>
         );
         return res;
