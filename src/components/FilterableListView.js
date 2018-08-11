@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import SearchWidget from './SearchWidget';
 import {ItemList, Button, TitleBar} from './StatelessComponents'
 import {deepCopy} from '../utility/Functions'
+import {hackNewsModel} from "../utility/DataModels";
 
 export default class FilterableListView extends Component
 {
@@ -11,24 +12,32 @@ export default class FilterableListView extends Component
 
         this.state =
         {
-            data : props.sourceData,
+            listData : [...props.dataSource],
             filterParams : deepCopy(props.dataModel)
         };
+        console.warn('props.listData');
+        console.warn(props.dataSource);
+        console.warn(this.state.listData);
     }
 
     render()
     {
-        let {data, filterParams} = this.state;
-        let {dataModel, sourceData} = this.props;
+        let {listData, filterParams} = this.state;
+        let {dataModel, dataSource, title = ''} = this.props;
         let res =
         (
             <div className="page">
-                <TitleBar className="title">React test</TitleBar>
-                <div className="interactions">
-                    <SearchWidget value={filterParams} defaultVal={dataModel} onApply={this.onApplySearch}/>
+                <TitleBar className="title">{title}</TitleBar>
+                <div className="dataContainer">
+
+                <div className="listHolder">
+                    <ItemList data={listData} model={dataModel} filterParams={filterParams} onDiscard={this.onDiscard}/>
+                    <Button onClick={() => this.onReset(dataSource)}>Reset</Button>
+                    {/*todo move reset into ItemList*/}
                 </div>
-                <ItemList data={data} model={dataModel} filterParams={filterParams} onDiscard={this.onDiscard}/>
-                <Button onClick={() => this.onReset(sourceData)}>Reset</Button>
+                <SearchWidget value={filterParams} defaultVal={dataModel} onApply={this.onApplySearch}/>
+                    {/*todo search*/}
+                </div>
             </div>
         );
         return res;
@@ -36,7 +45,8 @@ export default class FilterableListView extends Component
 
     onDiscard = (itemId) =>
     {
-        this.setState(prevState => ({data : prevState.data.filter(item => item.objId !== itemId)}));
+        let updatedList = this.state.listData.filter(item => item[this.state.filterParams.idField] !== itemId);
+        this.setState({listData : updatedList});
     };
 
     onApplySearch = (filterParams) =>
@@ -46,6 +56,6 @@ export default class FilterableListView extends Component
 
     onReset = (listData) =>
     {
-        this.setState({data : listData});
+        this.setState({listData : listData});
     };
 }

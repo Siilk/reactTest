@@ -1,15 +1,18 @@
+import React from "react";
+
 export const filterData = filterParams =>
     (
         item =>
         {
             let result = true;
-            let {vendor, model, year, engineCC, cyls} = item;
-            let {modelParam, vendorParam, yearParam, engineCCParam, cylsParam} = filterParams;
-            result &= model.startsWith(modelParam.value);
-            result &= vendor.startsWith(vendorParam.value);
-            result &= yearParam.value !== '' ? year == yearParam.value : true;
-            result &= engineCCParam.value !== '' ? engineCC == engineCCParam.value : true;
-            result &= cylsParam.value !== '' ? cyls == cylsParam.value : true;
+            Object.keys(filterParams.columns).map
+            (
+                modelField =>
+                {
+                    let columnDef = filterParams.columns[modelField];
+                    result &= item[columnDef.field].startsWith(columnDef.value);
+                }
+            );
             return result;
         }
     );
